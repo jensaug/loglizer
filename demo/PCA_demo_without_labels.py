@@ -20,8 +20,9 @@ struct_log = '../data/HDFS/HDFS_100k.log_structured.csv' # The structured log fi
 if __name__ == '__main__':
     ## 1. Load strutured log file and extract feature vectors
     # Save the raw event sequence file by setting save_csv=True
-    (x_train, _), (_, _) = dataloader.load_HDFS(struct_log, window='session', 
+    train_test_tuple = dataloader.load_HDFS(struct_log, window='session', 
                                                 split_type='sequential', save_csv=True)
+    (x_train, y_train), (x_test, y_test) = train_test_tuple[0], train_test_tuple[1]
     feature_extractor = preprocessing.FeatureExtractor()
     x_train = feature_extractor.fit_transform(x_train, term_weighting='tf-idf', 
                                               normalization='zero-mean')
@@ -38,7 +39,7 @@ if __name__ == '__main__':
     ## 3. Use the trained model for online anomaly detection
     print('Test phase:')
     # Load another new log file. Here we use struct_log for demo only
-    (x_test, _), (_, _) = dataloader.load_HDFS(struct_log, window='session', split_type='sequential')
+    #(x_test, _), (_, _) = dataloader.load_HDFS(struct_log, window='session', split_type='sequential')
     # Go through the same feature extraction process with training, using transform() instead
     x_test = feature_extractor.transform(x_test) 
     # Finally make predictions and alter on anomaly cases
