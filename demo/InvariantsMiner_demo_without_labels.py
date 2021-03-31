@@ -21,10 +21,11 @@ epsilon = 0.5 # threshold for estimating invariant space
 
 if __name__ == '__main__':
     # Load structured log without label info
-    (x_train, _), (x_test, _) = dataloader.load_HDFS(struct_log,
+    train_test_tuple = dataloader.load_HDFS(struct_log,
                                                      window='session', 
                                                      train_ratio=0.5,
                                                      split_type='sequential')
+    (x_train, y_train), (x_test, y_test) = train_test_tuple[0], train_test_tuple[1]
     # Feature extraction
     feature_extractor = preprocessing.FeatureExtractor()
     x_train = feature_extractor.fit_transform(x_train)
@@ -43,11 +44,12 @@ if __name__ == '__main__':
 
     # If you have labeled data, you can evaluate the accuracy of the model as well.
     # Load structured log with label info
-    (x_train, y_train), (x_test, y_test) = dataloader.load_HDFS(struct_log,
+    train_test_tuple = dataloader.load_HDFS(struct_log,
                                                                label_file=label_file,
                                                                window='session', 
                                                                train_ratio=0.5,
                                                                split_type='sequential')   
+    (x_train, y_train), (x_test, y_test) = train_test_tuple[0], train_test_tuple[1]
     x_test = feature_extractor.transform(x_test)
     precision, recall, f1 = model.evaluate(x_test, y_test)
 
