@@ -25,7 +25,7 @@ if __name__ == '__main__':
                                                      window='session', 
                                                      train_ratio=0.5,
                                                      split_type='sequential')
-    (x_train, y_train), (x_test, y_test) = train_test_tuple[0], train_test_tuple[1]
+    (x_train, _), (x_test, _) = train_test_tuple[0], train_test_tuple[1]
     # Feature extraction
     feature_extractor = preprocessing.FeatureExtractor()
     x_train = feature_extractor.fit_transform(x_train)
