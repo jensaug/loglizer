@@ -1,7 +1,6 @@
 <p align="center"> <a href="https://github.com/logpai"> <img src="https://github.com/logpai/logpai.github.io/blob/master/img/logpai_logo.jpg" width="425"></a></p>
 
-
-# Environment
+# Downstream changes
 
 Changes relative upstream project:
 
@@ -10,16 +9,39 @@ Changes relative upstream project:
 * Jupiter has been added for better visualization
 * InvariantsMiner_demo_without_labels.py has been converted to a notebook
 
-Dependency:
+# Dependency
 
 * Install [Python Poetry](https://python-poetry.org/docs/)
+* Or use Python3
 
-To run:
+# To run
 ```
 git clone https://github.com/jensaug/loglizer
 cd loglizer
+```
+
+# With Poetry
+```
 poetry install
+# To run jupyter
 poetry run jupyter notebook
+# To run demo directly
+poetry shell
+cd demo
+python demo/InvariantsMiner_demo_without_labels.py
+```
+
+# Without Poetry
+```
+python3 -m venv venv
+. venv/bin/activate
+pip install wheel
+pip install -r requirements.txt
+# To run jupyter
+jupyter notebook
+# To run demo directly
+cd demo
+python InvariantsMiner_demo_without_labels.py
 
 ```
 
